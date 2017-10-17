@@ -7,7 +7,13 @@ int maiorValor(int a, int b) { return (a > b)? a : b; }
 void mochila(int pMochila, int pElemento[], int valElemento[], int n)
 {
    int i, w;
-   int matriz[n+1][pMochila+1];
+
+   int **matriz = (int**) malloc((n+1) * sizeof(int*));
+
+   for(i = 0; i <= n; i++)
+   {
+      matriz[i] = (int *) malloc((pMochila + 1) * sizeof(int));
+   }
 
    for (i = 0; i <= n; i++)
    {
@@ -16,11 +22,11 @@ void mochila(int pMochila, int pElemento[], int valElemento[], int n)
        {
            if (i==0 || w==0)
            {
-				matriz[i][w] = 0;
+				    matriz[i][w] = 0;
            }
            else if (pElemento[i-1] <= w)
            {
-				matriz[i][w] = maiorValor(valElemento[i-1] + matriz[i-1][w-pElemento[i-1]],  matriz[i-1][w]);           	
+				    matriz[i][w] = maiorValor(valElemento[i-1] + matriz[i-1][w-pElemento[i-1]],  matriz[i-1][w]);           	
            }     
            else
            {
